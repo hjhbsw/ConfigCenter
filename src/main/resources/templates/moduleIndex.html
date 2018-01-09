@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<div th:if="${message}">
+		<h2 th:text="${message}" />
+	</div>
+	
+	<div>
+		<form method="POST" action="/module/add">
+			<table>
+				<tr>
+					<td>name:</td>
+					<td><input type="text" name="name" /></td>
+				</tr>
+				<tr>
+					<td>updateName:</td>
+					<td><input type="text" name="updateName" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Create" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div>
+		<ul>
+			<li th:each="module : ${modules}"><a
+				th:href="'/cm/index?enId='+${module.id}" th:text="${module}" />
+				<a th:href="'/module/del?id='+${module.id}" th:text="del" style="color: red;"/>
+				<a th:href="'/module/modify?id='+${module.id}" th:text="modify" style="color: orange;"/></li>
+		</ul>
+	</div>
+</body>
+</html>

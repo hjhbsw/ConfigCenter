@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<configuration>
+
+	<!-- ch.qos.logback.core.ConsoleAppender 控制台输出 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>[%-5level] %d{HH:mm:ss.SSS} [%thread] %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/core-log.%d{yyyy-MM-dd}.log</fileNamePattern>
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>[%-5level] %d{HH:mm:ss.SSS} [%thread] %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<logger name="com.cmcc.omc.configcenter" additivity="false">
+		<level value="debug" />
+		<appender-ref ref="console" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</logger>
+	<!-- 日志级别 -->
+	<root>
+		<level value="info" />
+		<appender-ref ref="console" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</root>
+
+</configuration> 

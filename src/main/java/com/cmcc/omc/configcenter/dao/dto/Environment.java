@@ -1,9 +1,12 @@
 package com.cmcc.omc.configcenter.dao.dto;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import com.cmcc.omc.configcenter.enums.NetElementTypeEnum;
 
@@ -19,7 +22,12 @@ public class Environment {
 	
 	private String name;
 		
+	private String descript;
+
 	private NetElementTypeEnum type; 
 	
-	private String url;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "adapterId")
+	private K8sAdapter adapter;
+	
 }
