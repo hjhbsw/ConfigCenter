@@ -1,0 +1,30 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<div th:if="${message}">
+		<h2 th:text="${message}" />
+	</div>
+	
+	<div>
+		<form method="POST" action="/module/update">
+			<table>
+				<tr>
+					<td><input type="hidden" name="id" th:value="${id}"/></td>
+				</tr>
+				<tr>
+					<td>name:</td>
+					<td><input type="text" name="name" th:value="${name}"/></td>
+				</tr>
+				<tr>
+					<td>updateName:</td>
+					<td><input type="text" name="updateName" th:value="${updateName}"/></td>
+				</tr>				
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Upload" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
