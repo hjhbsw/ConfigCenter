@@ -3,6 +3,8 @@ package com.cmcc.omc.configcenter.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,9 +31,10 @@ public class ConfigMapController {
 	ConfigFileReposity cfRsp;
 
 	@RequestMapping("/index")
-	public String openConfigMap(Integer id, Model model) {
+	public String openConfigMap(Integer id, Model model,HttpSession session) {
 		ConfigMap cm = cmRsp.findByModuleId(id);
 
+		session.setAttribute("moduleId", id);
 		model.addAttribute("moduleId", id);
 		if (cm != null) {
 			model.addAttribute("configMap", cm);

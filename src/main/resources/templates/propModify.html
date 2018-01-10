@@ -1,0 +1,36 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<h1>Property Modify Page</h1>
+	<div th:if="${message}">
+		<h3 style="color:green" th:text="${message}" />
+	</div>
+	
+	<div>
+		<form method="POST" action="/prop/update">
+			<table>
+				<tr>
+					<td><input type="hidden" name="id" th:value="${prop.id}"/></td>
+					<td><input type="hidden" name="moduleId" th:value="${prop.moduleId}"/></td>
+					<td><input type="hidden" name="configFileId" th:value="${prop.configFileId}"/></td>
+				</tr>
+				<tr>
+					<td>propKey:</td>
+					<td><input type="text" name="propKey" th:value="${prop.propKey}"/></td>
+				</tr>
+				<tr>
+					<td>propValue:</td>
+					<td><input type="text" name="propValue" th:value="${prop.propValue}"/></td>
+				</tr>	
+				<tr>
+					<td>placeHolder:</td>
+					<td><input type="text" name="placeHolder" th:value="${prop.placeHolder}"/></td>
+				</tr>			
+				<tr>
+					<td></td>
+					<td><input type="submit" value="update" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>

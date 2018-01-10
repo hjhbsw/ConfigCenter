@@ -1,8 +1,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
 
+<h1>Module Index Page</h1>
 	<div th:if="${message}">
-		<h2 th:text="${message}" />
+		<h3 style="color:green" th:text="${message}" />
 	</div>
 	
 	<div>
@@ -29,7 +30,8 @@
 			<li th:each="module : ${modules}"><a
 				th:href="'/cm/index?id='+${module.id}" th:text="${module}" />
 				<a th:href="'/module/del?id='+${module.id}" th:text="del" style="color: red;"/>
-				<a th:href="'/module/modify?id='+${module.id}" th:text="modify" style="color: orange;"/></li>
+				<a th:href="'/module/modify?id='+${module.id}" th:text="modify" style="color: orange;"/>
+				<a th:href="|/module/publish?id=${module.id}|" th:text="publish" style="color: blue"/></li>
 		</ul>
 	</div>
 </body>

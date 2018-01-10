@@ -1,0 +1,57 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<h1>Property Index Page</h1>
+	<div th:if="${message}">
+		<h3 style="color:green" th:text="${message}" />
+	</div>
+
+	<div th:text="${configFile.fileName}"></div>
+	<div><textarea disabled="disabled" cols="100" rows="20" th:text="${configFile.data}"/></div>
+	<div>
+
+		<form method="POST" action="/prop/add">
+			<table>
+				<tr>
+					<td>propKey:</td>
+					<td><input type="text" name="propKey" /></td>
+					<input type="hidden" name="configFileId"
+						th:value="${configFile.id}" />
+				</tr>
+				<tr>
+					<td>propValue:</td>
+					<td><input type="text" name="propValue" /></td>
+				</tr>
+				<tr>
+					<td>placeHolder:</td>
+					<td><input type="text" name="placeHolder" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="add" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+
+	<div>
+		<table border="1">
+			<tr>
+				<td>propKey</td>
+				<td>propValue</td>
+				<td>placeHolder</td>
+				<td>operate</td>
+			</tr>
+			<tr th:each="prop: ${props}">
+				<td th:text="${prop.propKey}"></td>
+				<td th:text="${prop.propValue}"></td>
+				<td th:text="${prop.placeHolder}"></td>
+				<td>
+					<a th:href="|/prop/del?id=${prop.id}|" style="color:red">del</a>
+					<a th:href="|/prop/open?id=${prop.id}|" style="color:orange">modify</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+</body>
+</html>

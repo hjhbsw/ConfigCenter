@@ -2,15 +2,16 @@ package com.cmcc.omc.configcenter.service;
 
 import java.util.List;
 
-import com.cmcc.omc.configcenter.dao.dto.Module;
-import com.cmcc.omc.configcenter.dao.dto.Property;
+import com.cmcc.omc.configcenter.bean.PropBean;
 
 public interface ModuleService {
 
-	public List<Module> listAll();
+	public String publish(Integer id);
 	
-	public List<Property> listModuleProperty(Integer moduleId);
+	public boolean publishByModuleName(String name);
 	
+	public List<PropBean> getModuleProperty(String moduleName);
 	
+	public boolean upateProp(String module,List<PropBean> props);
 	
 }

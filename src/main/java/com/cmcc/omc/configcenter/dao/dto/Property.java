@@ -24,5 +24,5 @@ public class Property {
 	
 	private Integer moduleId;
 	
-	private Integer configMapId;
+	private Integer configFileId;
 }
