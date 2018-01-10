@@ -13,8 +13,8 @@
 					<td><input type="text" name="name" /></td>
 				</tr>
 				<tr>
-					<td>updateName:</td>
-					<td><input type="text" name="updateName" /></td>
+					<td>workloadName:</td>
+					<td><input type="text" name="workloadName" /></td>
 				</tr>
 				<tr>
 					<td></td>
@@ -27,7 +27,7 @@
 	<div>
 		<ul>
 			<li th:each="module : ${modules}"><a
-				th:href="'/cm/index?enId='+${module.id}" th:text="${module}" />
+				th:href="'/cm/index?id='+${module.id}" th:text="${module}" />
 				<a th:href="'/module/del?id='+${module.id}" th:text="del" style="color: red;"/>
 				<a th:href="'/module/modify?id='+${module.id}" th:text="modify" style="color: orange;"/></li>
 		</ul>

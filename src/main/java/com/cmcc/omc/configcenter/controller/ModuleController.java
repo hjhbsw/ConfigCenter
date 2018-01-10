@@ -22,8 +22,7 @@ public class ModuleController {
 	@Autowired
 	ModuleRepository mRep;
 	
-	@Autowired
-	ConfigMapRepository cmRsp;
+
 	
 	@Autowired
 	ConfigFileReposity cfRsp;
@@ -48,8 +47,8 @@ public class ModuleController {
 		
 		if(StringUtils.isEmpty(module.getName())){
 			result = "Name is Empty";
-		}else if(StringUtils.isEmpty(module.getUpdateName())){
-			result = "UpdateName is Empty";
+		}else if(StringUtils.isEmpty(module.getWorkloadName())){
+			result = "workloadName is Empty";
 		}else{
 			mRep.save(module);
 		}
@@ -72,13 +71,16 @@ public class ModuleController {
 		Module m = mRep.findOne(id);
 		model.addAttribute("id", m.getId());
 		model.addAttribute("name", m.getName());
-		model.addAttribute("updateName", m.getUpdateName());
+		model.addAttribute("workloadName", m.getWorkloadName());
 		return "moduleModify";
 	}
 	
 	@RequestMapping("/update")
 	public String update(Module m,RedirectAttributes red){
 		
+		mRep.save(m);
+		
+		red.addFlashAttribute("message", "modify success");
 		return "redirect:/module/index";
 	}
 }

@@ -1,0 +1,93 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+
+	<div th:if="${message}">
+		<h2 th:text="${message}" />
+	</div>
+
+	<div th:if="${configMap}">
+		<div>
+
+			<form method="POST" action="/cm/update">
+				<table>
+					<tr>
+						<td>name:</td>
+						<td><input type="text" name="name"
+							th:value="${configMap.name}" /></td>
+						<input type="hidden" name="moduleId" th:value="${moduleId}" />
+						<input type="hidden" name="id" th:value="${configMap.id}" />
+					</tr>
+					<tr>
+						<td>nameSpace:</td>
+						<td><input type="text" name="nameSpace"
+							th:value="${configMap.nameSpace}" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Update" /></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+		<div>
+			<form method="POST" enctype="multipart/form-data"
+				action="/cm/addFile">
+				<table>
+					<input type="hidden" name="configMapId" th:value="${configMap.id}" />
+					<input type="hidden" name="moduleId" th:value="${moduleId}" />
+					<tr>
+						<td>File to upload:</td>
+						<td><input type="file" name="file" /></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td><input type="submit" value="Upload" /></td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+
+	<div th:unless="${configMap}">
+		<form method="POST" action="/cm/add">
+			<table>
+				<tr>
+					<input type="hidden" name="moduleId" th:value="${moduleId}" />
+					<td>name:</td>
+					<td><input type="text" name="name" /></td>
+				</tr>
+				<tr>
+					<td>nameSpace:</td>
+					<td><input type="text" name="nameSpace" value="default" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Create" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+	<div>
+		<ul>
+			<li th:each="cf : ${cfs}"><a
+				th:href="'/prop/index?id='+${cf.id}" th:text="|id=${cf.id},fileName=${cf.fileName}|" /> <a
+				th:href="'/cm/delCf?id='+${cf.id}+'&amp;moduleId='+${moduleId}"
+				th:text="del" style="color: red;" />
+
+				<form method="POST" enctype="multipart/form-data"
+					action="/cm/updateFile">
+					<table>
+						<input type="hidden" name="id" th:value="${cf.id}" />
+						<input type="hidden" name="moduleId" th:value="${moduleId}" />
+						<input type="hidden" name="configMapId" th:value="${cf.configMapId}" />
+						<tr>
+							<td>modify:</td>
+							<td><input type="file" name="file" /></td>
+							<td><input type="submit" value="change" /></td>
+						</tr>
+					</table>
+				</form></li>
+		</ul>
+	</div>
+</body>
+</html>

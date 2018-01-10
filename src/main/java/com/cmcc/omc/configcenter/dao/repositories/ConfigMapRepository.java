@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import com.cmcc.omc.configcenter.dao.dto.ConfigMap;
 
 public interface ConfigMapRepository extends CrudRepository<ConfigMap, Integer> {
-
+	
+	public ConfigMap findByModuleId(Integer moudleId);
 }

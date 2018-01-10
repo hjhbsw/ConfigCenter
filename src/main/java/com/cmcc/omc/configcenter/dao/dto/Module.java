@@ -18,6 +18,7 @@ public class Module {
 	
 	private String name;
 	
-	private String updateName;
+	private String workloadName;		
 		
+	
 }
