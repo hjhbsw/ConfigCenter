@@ -8,4 +8,5 @@ import com.cmcc.omc.configcenter.dao.dto.Module;
 
 public interface ModuleRepository extends CrudRepository<Module, Integer>{
 
+	public Module findByName(String name);
 }

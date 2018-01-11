@@ -16,17 +16,17 @@ public class RestApi {
 	@Autowired
 	ModuleService service;
 	
-	@RequestMapping("all")
+	@RequestMapping("/all")
 	public List<PropBean> fetchAll(String moduleName){
 		return service.getModuleProperty(moduleName);
 	}
 	
-	@RequestMapping("update")
+	@RequestMapping("/update")
 	public boolean updateProperty(String modulenName,List<PropBean> props){
 		return service.upateProp(modulenName, props);
 	}
 	
-	@RequestMapping("publish")
+	@RequestMapping("/publish")
 	public boolean publish(String name){
 		return service.publishByModuleName(name);
 	}
