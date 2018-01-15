@@ -1,5 +1,11 @@
 package com.cmcc.omc.configcenter.service;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +25,11 @@ import com.cmcc.omc.configcenter.dao.repositories.ModuleRepository;
 import com.cmcc.omc.configcenter.dao.repositories.ProperityRepository;
 import com.cmcc.omc.configcenter.publisher.k8sApi;
 
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class ModuleServiceImpl implements ModuleService {
 
 	@Autowired
@@ -60,13 +70,26 @@ public class ModuleServiceImpl implements ModuleService {
 	}
 
 	
-	private boolean publish(Module m){
+	private synchronized boolean publish(Module m){
 		if(m == null){
 			return false;
 		}
 		
 		ConfigMap cm = cmr.findByModuleId(m.getId());
 		
+		String modulePath = config.getTempPath() + "/" + m.getName();
+		
+		Path mp = Paths.get(modulePath);
+		
+		if(!Files.exists(mp)){
+			try {
+				Files.createDirectories(mp);
+			} catch (IOException e) {
+				log.warn("Create folder {} error",modulePath,e);
+				return false;
+			}
+		}
+	
 		List<ConfigFile> cfList = cfr.findByConfigMapId(cm.getId());
 		
 		for(ConfigFile cf:cfList){
@@ -76,14 +99,38 @@ public class ModuleServiceImpl implements ModuleService {
 			
 			if(props != null){
 				for(Property prop:props){
-					StringBuilder sb = null;
 					data = data.replace(prop.getPlaceHolder(), prop.getPropValue());
 				}
 			}
 			
-			String filePath = config.getTempPath() +"/" + m.getName() +"/" + cf.getFileName();
+			
+			Path path = Paths.get(modulePath,cf.getFileName());
+			
+			if(!Files.exists(path)){
+				try {
+					Files.createFile(path);
+				} catch (IOException e) {
+					log.warn("Save file {} error ",path,e);
+					return false;
+				}
+			}
+			
+			try (BufferedWriter bw =  Files.newBufferedWriter(path, Charset.forName("utf-8"))){
+				bw.write(data);
+				
+			} catch (IOException e) {
+				log.warn("Write file {} error ",path,e);
+				return false;
+			}
 		}
-		return true;
+		
+		if(api.updateConfigMap(cm.getName(), modulePath, cm.getNameSpace()))
+		{
+			if(api.restartResources(m.getWorkloadName(), "default")){
+				return true;
+			}
+		}
+		return false;
 	}
 	@Override
 	public List<PropBean> getModuleProperty(String moduleName) {
