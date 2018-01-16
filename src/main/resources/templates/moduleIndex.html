@@ -27,8 +27,10 @@
 
 	<div>
 		<ul>
-			<li th:each="module : ${modules}"><a
-				th:href="'/cm/index?id='+${module.id}" th:text="${module}" />
+			<li th:each="module : ${modules}">
+			<span th:text="${module}"/>
+				<a th:href="'/cm/index?id='+${module.id}">configMap</a>
+				<a th:href="'/dy/index?id='+${module.id}">dynamic</a>
 				<a th:href="'/module/del?id='+${module.id}" th:text="del" style="color: red;"/>
 				<a th:href="'/module/modify?id='+${module.id}" th:text="modify" style="color: orange;"/>
 				<a th:href="|/module/publish?id=${module.id}|" th:text="publish" style="color: blue"/></li>
