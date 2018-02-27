@@ -1,5 +1,11 @@
 package com.cmcc.omc.configcenter.bean;
 
-public class RestBean {
+import lombok.Data;
 
+@Data
+public class RestBean {
+	
+	private Integer result;
+	
+	private String reason;
 }

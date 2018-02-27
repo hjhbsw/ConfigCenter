@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: ConfigCenter
+  redis:
+    host: 172.23.27.174
+    port: 6379
+    pool:
+      max-active: 8
+      max-idle: 8 
+  jpa: 
+    show-sql: true 
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/cat?verifyServerCertificate=false&useSSL=false&requireSSL=false
+    username: root
+    password: root
+  thymeleaf:
+    cache: false
+  http:
+    multipart:
+      max-file-size: 128000
+      max-request-size: 128000
+      
+coreconfig: 
+  tempPath: /Users/hejiahuan/Documents/workspace-sts-3.8.4.RELEASE/ConfigCenter/temp
+  kubectl: /user/local/bin/kubectl
+     

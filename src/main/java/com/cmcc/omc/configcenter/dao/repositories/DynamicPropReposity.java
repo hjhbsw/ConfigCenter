@@ -10,4 +10,6 @@ import com.cmcc.omc.configcenter.dao.dto.DynamicProp;
 public interface DynamicPropReposity extends JpaRepository<DynamicProp, Integer>,CrudRepository<DynamicProp, Integer>{
 
 	public List<DynamicProp> findByModuleId(Integer id);
+	
+	public DynamicProp findByModuleIdAndTopic(Integer moduleId,String topic);
 }

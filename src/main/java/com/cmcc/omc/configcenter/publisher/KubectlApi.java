@@ -17,8 +17,8 @@ public class KubectlApi implements k8sApi {
 
 	@Override
 	public boolean restartResources(String resources, String nameSpace) {
-		
-		String delePodCommand = config.getKubectl() + "delete po -l app="+resources + " -n " + nameSpace;
+
+		String delePodCommand = config.getKubectl() + " delete po -l app=" + resources + " -n " + nameSpace;
 		return runCommand(delePodCommand);
 	}
 
@@ -27,14 +27,14 @@ public class KubectlApi implements k8sApi {
 
 		String deleCommand = config.getKubectl() + " delete cm " + configMapName + " -n " + nameSpace;
 
-		if (runCommand(deleCommand)) {
+		runCommand(deleCommand);
 
-			String createCommand = config.getKubectl() + " create cm " + configMapName + " -n " + nameSpace
-					+ " --from-file=" + folderPath;
-			if (runCommand(createCommand)) {
-				return true;
-			}
+		String createCommand = config.getKubectl() + " create cm " + configMapName + " -n " + nameSpace
+				+ " --from-file=" + folderPath;
+		if (runCommand(createCommand)) {
+			return true;
 		}
+
 		return false;
 	}
 

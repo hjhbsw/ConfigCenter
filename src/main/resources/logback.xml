@@ -24,13 +24,13 @@
 	<logger name="com.cmcc.omc.configcenter" additivity="false">
 		<level value="debug" />
 		<appender-ref ref="console" />
-		<!-- <appender-ref ref="FILE" /> -->
+		<appender-ref ref="FILE" />
 	</logger>
 	<!-- 日志级别 -->
 	<root>
-		<level value="info" />
+		<level value="debug" />
 		<appender-ref ref="console" />
-		<!-- <appender-ref ref="FILE" /> -->
+		<appender-ref ref="FILE" />
 	</root>
 
 </configuration> 

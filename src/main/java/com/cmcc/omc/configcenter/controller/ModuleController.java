@@ -74,6 +74,7 @@ public class ModuleController {
 		return "redirect:/module/index";
 	}
 	
+	@RequestMapping("/publish")
 	public String publish(Integer id,RedirectAttributes red){
 	
 		red.addFlashAttribute("message", service.publish(id));

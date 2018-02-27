@@ -9,7 +9,9 @@ public class PropBean {
 	
 	private String value;
 
-	public PropBean(String key, String value) {
+	private boolean dynamic;
+	
+	public PropBean(String key, String value,boolean dynamic) {
 		super();
 		this.key = key;
 		this.value = value;

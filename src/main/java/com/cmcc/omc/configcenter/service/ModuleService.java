@@ -12,6 +12,9 @@ public interface ModuleService {
 	
 	public List<PropBean> getModuleProperty(String moduleName);
 	
-	public boolean upateProp(String module,List<PropBean> props);
+	public boolean upateProp(String module,String key,String value);
 	
+	public boolean dynamicProp(String module,String key,String value);
+	
+	public boolean pushDynamic(Integer id);
 }

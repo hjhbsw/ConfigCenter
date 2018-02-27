@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: ConfigCenter
+  redis:
+    host: 172.23.27.174
+    port: 6379
+    pool:
+      max-active: 8
+      max-idle: 8 
+  jpa: 
+    show-sql: true 
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:h2:file:./.h2/testdb
+    username: cmcc
+    password: cmcc@1
+    driverClassName: org.h2.Driver
+  thymeleaf:
+    cache: false
+  http:
+    multipart:
+      max-file-size: 128000
+      max-request-size: 128000
+      
+coreconfig: 
+  tempPath: /IPSMGW/ConfigCenter/temp
+  kubectl: /usr/bin/kubectl
+     

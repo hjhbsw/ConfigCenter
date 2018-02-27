@@ -22,12 +22,18 @@ public class RestApi {
 	}
 	
 	@RequestMapping("/update")
-	public boolean updateProperty(String modulenName,List<PropBean> props){
-		return service.upateProp(modulenName, props);
+	public boolean updateProperty(String moduleName,String key,String value){
+		return service.upateProp(moduleName, key,value);
+	}
+	
+	@RequestMapping("/dynamicUpdate")
+	public boolean dynamicUpate(String moduleName,String key,String value){
+		return service.dynamicProp(moduleName, key, value);
 	}
 	
 	@RequestMapping("/publish")
 	public boolean publish(String name){
+//		return true;
 		return service.publishByModuleName(name);
 	}
 }
